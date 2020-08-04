@@ -27,20 +27,21 @@ def validate_person(image):
     # print(response['result'].encode('UTF-8'))
     jwt_decoded = jwt.decode(response['result'], verify=False)\
         if 'result' in response else None
+    print(response)
     if response['success'] is False:
         if response['errorCode'] == 'NotFound':
             print('Пользователь не найден')
             # action
-            return 1, None
+            return 1, 'Пользователь не найден'
         elif response['errorCode'] == 'FailedToFindFace':
-            print('На удалось найти лицо')
+            print('На удалось найти лицо на фото')
             # action
-            return 2, None
+            return 2, 'На удалось найти лицо'
         elif response['errorCode'] == 'InvalidData':
             print('Неправильно заполнено одно из полей')
             # action
-            return 3, None
-        return 0, None
+            return 3, 'Неправильно заполнено одно из полей'
+        return 0, response['errorCode']
     return response, jwt_decoded
 
 
@@ -58,16 +59,16 @@ def add_new_person(image):
         if response['errorCode'] == 'AlreadyExist':
             print('Пользователь уже существует')
             # action
-            return 1, None
+            return 1, 'Пользователь уже существует'
         elif response['errorCode'] == 'FailedToFindFace':
             print('На удалось найти лицо')
             # action
-            return 2, None
+            return 2, 'На удалось найти лицо'
         elif response['errorCode'] == 'InvalidData':
             print('Неправильно заполнено одно из полей')
             # action
-            return 3, None
-        return 0, None
+            return 3, 'Неправильно заполнено одно из полей'
+        return 0, response['errorCode']
     return response, jwt_decoded
 
 
@@ -84,18 +85,18 @@ def add_photo_person(image):
         if 'result' in response else None
     if response['success'] is False:
         if response['errorCode'] == 'Missmatch':
-            print('Фото лица не совпадают')
+            print('Фото лиц не совпадают')
             # action
-            return 1, None
+            return 1, 'Фото лиц не совпадают'
         elif response['errorCode'] == 'FailedToFindFace':
             print('На удалось найти лицо')
             # action
-            return 2, None
+            return 2, 'На удалось найти лицо'
         elif response['errorCode'] == 'InvalidData':
             print('Неправильно заполнено одно из полей')
             # action
-            return 3, None
-        return 0, None
+            return 3, 'Неправильно заполнено одно из полей'
+        return 0, response['errorCode']
     return response, jwt_decoded
 
 
@@ -106,7 +107,7 @@ def del_person(id_):
     response = requests.request("POST", url, headers=headers, data=payload)
     response = json.loads(response.text)
     if response['success'] is False:
-        return 0, None
+        return 0, response['errorCode']
     return response
 
 
@@ -114,14 +115,17 @@ def get_customerId(info):
     return info['customerId']
 
 
-# add_info = add_new_person(open('E:/Python_programs/work/files/faces.jpg', 'rb'))
-# print(add_info)
+if __name__ == "__main__":
+    # add_info = add_new_person(open('E:/Python_programs/work/files/faces.jpg', 'rb'))
+    # print(add_info)
 
-#add_photo_info = add_photo_person(open('E:/Python_programs/work/files/face.jpg', 'rb'))
-#print(add_photo_info)
+    #add_photo_info = add_photo_person(open('E:/Python_programs/work/files/face.jpg', 'rb'))
+    #print(add_photo_info)
 
-validate_info = validate_person(open('E:/Python_programs/work/files/faces.jpg', 'rb'))
-print(validate_info)
+    #validate_info = validate_person(open('E:/Python_programs/work/files/faces.jpg', 'rb'))
+    #print(validate_info)
 
-del_info = del_person('64e4d4b1-5cbe-4863-a653-9cf54a1a7e0b')
-print(del_info)
+    #del_info = del_person('64e4d4b1-5cbe-4863-a653-9cf54a1a7e0b')
+    #print(del_info)
+
+    pass

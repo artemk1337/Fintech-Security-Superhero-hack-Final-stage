@@ -22,12 +22,20 @@ def validate_person(image):
                'Clientid': '0E4E0009-7475-4C72-8D82-C25B66A59384',
                'Modelid': '1'}
     files = [('image', image)]
-    response = requests.request("POST", url, headers=Headers, data=payload, files=files)
+
+    try:
+        response = requests.request("POST", url, headers=Headers, data=payload, files=files)
+    # no internet
+    except requests.ConnectionError:
+        # save logs
+        # block system
+        quit(-1)
+
     response = json.loads(response.text)
     # print(response['result'].encode('UTF-8'))
     jwt_decoded = jwt.decode(response['result'], verify=False)\
         if 'result' in response else None
-    print(response)
+    # print(response)
     if response['success'] is False:
         if response['errorCode'] == 'NotFound':
             print('Пользователь не найден')
@@ -119,13 +127,13 @@ if __name__ == "__main__":
     # add_info = add_new_person(open('E:/Python_programs/work/files/faces.jpg', 'rb'))
     # print(add_info)
 
-    #add_photo_info = add_photo_person(open('E:/Python_programs/work/files/face.jpg', 'rb'))
-    #print(add_photo_info)
+    # add_photo_info = add_photo_person(open('E:/Python_programs/work/files/face.jpg', 'rb'))
+    # print(add_photo_info)
 
-    #validate_info = validate_person(open('E:/Python_programs/work/files/faces.jpg', 'rb'))
-    #print(validate_info)
+    # validate_info = validate_person(open('E:/Python_programs/work/files/faces.jpg', 'rb'))
+    # print(validate_info)
 
-    #del_info = del_person('64e4d4b1-5cbe-4863-a653-9cf54a1a7e0b')
-    #print(del_info)
+    # del_info = del_person('64e4d4b1-5cbe-4863-a653-9cf54a1a7e0b')
+    # print(del_info)
 
     pass

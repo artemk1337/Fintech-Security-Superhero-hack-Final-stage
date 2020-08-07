@@ -1,24 +1,13 @@
-import sys
 import ctypes
 import psutil
-from PIL import Image, ImageDraw
-from PyQt5.QtWidgets import QWidget
-from PIL import Image
-from PyQt5 import QtCore
-from PyQt5.QtGui import QPixmap, QImage
-from PyQt5.QtCore import pyqtSlot
-from PyQt5.QtWidgets import (QMainWindow, QApplication, QPushButton)
-from visual_ui import Ui_MainWindow
-import numpy as np
 import cv2
-from threading import Thread, currentThread
 from api import validate_person
 import time
-import copy
 from private import userID
 from tg_bot import TelegramBot
-import os, signal
 from multiprocessing import Process, freeze_support
+from PIL import Image
+from io import BytesIO
 
 # pyuic5 visual.ui -o visual_ui.py
 # pyinstaller --onefile --noconsole visual.py
@@ -42,10 +31,15 @@ def send_tg_msg(msg):
     tg.start_bot()
 
 
-class ImageHolder(Process):
+class ImageHolder:
     def __init__(self):
         self.success = True
+
         self.image = None
+        self.STATUS = True
+
+        self.SEND_TG = False
+        self.SENG_MAIL = False
 
         self.time_start_timeout = None
         self.time_start_other_person = None
@@ -57,19 +51,18 @@ class ImageHolder(Process):
         self.cap = None
         self.time_sleep = 0
 
-        super(ImageHolder, self).__init__()
+        self.update_frame()
 
-        # self.update_frame()
-        # self.multithreading()
-
-    """
-    def multithreading(self):
-        self.thread = Thread(target=self.update_frame, args=())
-        self.thread.start()
-    """
-
-    # @run_async
+    @run_async
     def run(self):
+        def send_message(msg):
+            if self.SEND_TG is True:
+                p = Process(target=send_tg_msg, args=(msg,))
+                p.start()
+            if self.SENG_MAIL is True:
+                # send msg mail
+                pass
+
         def isLocked():
             """
             Check if system is locked
@@ -95,7 +88,7 @@ class ImageHolder(Process):
             self.time_start_other_person = time.time()
 
         self.cap = cv2.VideoCapture(0)
-        while True:
+        while self.STATUS is True:
             reset_timers()
             # while system isn't locked
             while isLocked() is False:
@@ -104,9 +97,11 @@ class ImageHolder(Process):
                 # success get image from camera
                 if ret:
                     self.image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-                    cv2.imwrite('tmp.jpg', self.image)
-                    # action
-                    info = validate_person(open('tmp.jpg', 'rb'))
+                    image = Image.fromarray(self.imageimage)
+                    temp = BytesIO()
+                    image.save(temp, format='jpeg')
+                    temp = BytesIO(temp.getvalue())
+                    info = validate_person(temp)
 
                     # check error code
                     if type(info[0]) == int:
@@ -114,9 +109,7 @@ class ImageHolder(Process):
                         if info[0] == 1:
                             self.success = False
                             if self.max_time_other_persons < time.time() - self.time_start_other_person:
-                                p = Process(target=send_tg_msg, args=('Ложная идентификация',))
-                                p.start()
-
+                                send_message('Ложная идентификация')
                                 block_system()
                                 reset_timers()
 
@@ -124,9 +117,7 @@ class ImageHolder(Process):
                         elif info[0] == 2:
                             self.success = False
                             if self.max_timeout < time.time() - self.time_start_timeout:
-                                p = Process(target=send_tg_msg, args=('Пользователь покинул рабочее место',))
-                                p.start()
-
+                                send_message('Пользователь покинул рабочее место')
                                 block_system()
                                 reset_timers()
 
@@ -134,9 +125,7 @@ class ImageHolder(Process):
                         else:
                             self.success = False
                             if self.max_timeout < time.time() - self.time_start_timeout:
-                                p = Process(target=send_tg_msg, args=(str(info[1]),))
-                                p.start()
-
+                                send_message(str(info[1]))
                                 block_system()
                                 reset_timers()
 
@@ -152,16 +141,14 @@ class ImageHolder(Process):
                         else:
                             self.success = False
                             if self.max_time_other_persons < time.time() - self.time_start_other_person:
-                                p = Process(target=send_tg_msg, args=('Ложная идентификация\n' + str(info[1]),))
-                                p.start()
-
+                                send_message('Ложная идентификация\n' + str(info[1]))
                                 block_system()
                                 reset_timers()
 
                 # Can't get image from camera
                 else:
                     if self.max_timeout < time.time() - self.time_start_timeout:
-                        send_tg_msg('Проблемы с подключением камеры')
+                        send_message('Проблемы с подключением камеры')
                         block_system()
 
                     # raise ValueError('Включите вебку!')
@@ -172,12 +159,9 @@ if __name__ == "__main__":
     freeze_support()
 
     imholder = ImageHolder()
-    imholder.start()
-
-    PID = imholder.pid
 
     # ДЛЯ НАС. ПОТОМ УБЕРЕМ!
     time.sleep(100)
 
     # Stop program
-    imholder.terminate()
+    imholder.STATUS = False

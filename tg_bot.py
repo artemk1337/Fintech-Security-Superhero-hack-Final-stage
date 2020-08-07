@@ -4,16 +4,8 @@ from telegram import ChatAction
 from telegram import error
 import logging
 import os
-import ctypes
-from datetime import datetime
 
-from private import TG_admins_id, TOKEN, REQUEST_KWARGS, PC_info
-
-
-def block_system():
-    ctypes.windll.user32.LockWorkStation()
-    # os.kill(os.getpid(), signal.SIGINT)
-    pass
+from private import telegram_admins, TOKEN, REQUEST_KWARGS, PC_info
 
 
 class TelegramBot:
@@ -23,7 +15,7 @@ class TelegramBot:
         self.updater = None
         self.TOKEN = TOKEN
         self.REQUEST_KWARGS = REQUEST_KWARGS
-        self.admins_id = TG_admins_id
+        self.admins_id = telegram_admins
         self.pc_info = PC_info
 
     # logging errors
@@ -54,7 +46,7 @@ class TelegramBot:
 
     def send_message_admin(self, update, context):
         import signal
-        for id_ in TG_admins_id:
+        for id_ in self.admins_id:
             context.bot.send_chat_action(chat_id=id_,
                                          action=ChatAction.TYPING)
             context.bot.send_message(chat_id=id_,
@@ -79,10 +71,12 @@ class TelegramBot:
         try:
             self.updater.start_polling()
         except error.NetworkError:
-            block_system()
+            # block_system()
+            pass
         print("Start bot")
 
-        self.send_message_admin(self.updater, self.dp)
+        if self.msg_ != 'TEST BOT':
+            self.send_message_admin(self.updater, self.dp)
 
         # Run the bot until you press Ctrl-C or the process receives SIGINT,
         # SIGTERM or SIGABRT. This should be used most of the time, since
@@ -96,7 +90,7 @@ class TelegramBot:
 
 
 if __name__ == "__main__":
-    tg = TelegramBot('123')
+    tg = TelegramBot('TEST BOT')
     tg.start_bot()
 
 

@@ -1,8 +1,65 @@
-PC_info = 'Pc №1'
+# <=======================================> #
+# <========== Telegram Settings ==========> #
+# <=======================================> #
 
-userID = ['123']
 
-TG_admins_id = ['436264579']
-
+telegram_admins = [436264579]
 TOKEN = '966549792:AAEW2fJH7DMRYydCpqDyfvJ6epyO1IGAmOk'
 REQUEST_KWARGS = None
+
+
+# <==========================================> #
+# <========== User And Pc Settings ==========> #
+# <==========================================> #
+
+
+userID = ['sd']
+PC_info = "sd"
+
+# текущий пользователь
+import getpass
+USERNAME = getpass.getuser()
+
+# MAC-адрес компьютера
+from uuid import getnode as get_mac
+MAC = get_mac()
+
+
+# <======================================> #
+# <========== Program Settings ==========> #
+# <======================================> #
+
+
+# Coil64
+ProgramName = 'test_prj'
+AUTORUN = True
+TG = False
+MAIL = False
+LOGGING = False
+
+
+# путь до директории с файлом автозапуска
+PATH = "E:/Python_programs/Fintech-Security-Superhero-hack/test"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

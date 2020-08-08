@@ -1,0 +1,37 @@
+root - ERROR - оношрйю нярюмнбйх опнжеяяю
+root - ERROR - Exception occurred
+Traceback (most recent call last):
+  File "reborn.py", line 334, in <module>
+  File "reborn.py", line 299, in __init__
+  File "reborn.py", line 306, in start
+  File "lib\site-packages\psutil\__init__.py", line 1405, in pid_exists
+KeyboardInterrupt
+root - ERROR - оношрйю нярюмнбйх опнжеяяю
+root - ERROR - Exception occurred
+Traceback (most recent call last):
+  File "reborn.py", line 334, in <module>
+  File "reborn.py", line 299, in __init__
+  File "reborn.py", line 306, in start
+  File "lib\site-packages\psutil\__init__.py", line 1405, in pid_exists
+KeyboardInterrupt
+root - ERROR - оношрйю нярюмнбйх опнжеяяю
+root - ERROR - оношрйю нярюмнбйх опнжеяяю
+root - ERROR - Exception occurred
+Traceback (most recent call last):
+  File "reborn.py", line 334, in <module>
+  File "reborn.py", line 299, in __init__
+  File "reborn.py", line 306, in start
+  File "lib\site-packages\psutil\__init__.py", line 1405, in pid_exists
+KeyboardInterrupt
+root - ERROR - оношрйю нярюмнбйх опнжеяяю
+root - ERROR - оношрйю нярюмнбйх опнжеяяю
+root - ERROR - Exception occurred
+Traceback (most recent call last):
+  File "reborn.py", line 334, in <module>
+  File "reborn.py", line 299, in __init__
+  File "reborn.py", line 306, in start
+  File "lib\site-packages\psutil\__init__.py", line 1405, in pid_exists
+KeyboardInterrupt
+root - ERROR - оношрйю хглемхрэ яепбхя
+root - ERROR - оношрйю нярюмнбйх опнжеяяю
+root - ERROR - оношрйю нярюмнбйх опнжеяяю

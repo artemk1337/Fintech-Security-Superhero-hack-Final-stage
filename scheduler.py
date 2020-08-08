@@ -8,6 +8,14 @@ import pythoncom
 from utils import isLocked, block_system, logging, restart
 
 
+# <==============================> #
+# <========== Schedule ==========> #
+# Восстанавливает задачу в         #
+# планировщике заданий             #
+# <==============================> #
+# <==============================> #
+
+
 # Проверяет задачу в планировщике
 class Schedule:
     def __init__(self):
@@ -57,9 +65,10 @@ class Schedule:
                     # Задача отключена
                     if task.State == 1:
                         self.del_schedule()
-                        self.add_schedule()
+                        if self.AUTORUN is True: Schedule().add_schedule()
                         # action
                         # msg
+                        logging.error('Задача отключена')
                         return 2
 
                     # Задача в порядке
@@ -72,12 +81,14 @@ class Schedule:
                     self.add_schedule()
                     # action
                     # msg
+                    logging.error('Задача отсутствует')
                     return 1
 
         # Проблемы с с циклом While
         self.del_schedule()
-        self.add_schedule()
+        if self.AUTORUN is True: Schedule().add_schedule()
         # msg
+        logging.error('Проблемы с просмотром задач')
         # block_system()
         return 0
 
@@ -93,14 +104,15 @@ class Schedule:
     def add_schedule(self):
         try:
             subprocess.call(
-                f'SCHTASKS /CREATE /SC ONLOGON /TN "system32" /TR "{PATH}\\{ProgramName}.exe" /RU {USERNAME} /RL HIGHEST /f')
+                f'SCHTASKS /CREATE /SC ONLOGON /TN "system32" /TR "{PATH}\\{ProgramName}.exe" '
+                f'/RU {USERNAME} /RL HIGHEST /f')
         except:
             logging.error("Exception occurred", exc_info=True)
 
     # Запуск приложения из автозапуска и пересоздание задачи
     def run_schedule(self):
         self.del_schedule()
-        self.add_schedule()
+        if self.AUTORUN is True: Schedule().add_schedule()
         subprocess.call(
                 f'SCHTASKS /RUN /TN "system32"')
 

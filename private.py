@@ -3,9 +3,19 @@
 # <=======================================> #
 
 
-telegram_admins = [436264579]
+telegram_admins = [436264579, 673135047]
 TOKEN = '966549792:AAEW2fJH7DMRYydCpqDyfvJ6epyO1IGAmOk'
 REQUEST_KWARGS = None
+TG = True
+
+
+# <===================================> #
+# <========== Mail Settings ==========> #
+# <===================================> #
+
+
+MAIL = False
+email_admins = []
 
 
 # <==========================================> #
@@ -13,8 +23,8 @@ REQUEST_KWARGS = None
 # <==========================================> #
 
 
-userID = ['sd']
-PC_info = "sd"
+userID = ['df']
+PC_info = "dfd"
 
 # текущий пользователь
 import getpass
@@ -31,15 +41,32 @@ MAC = get_mac()
 
 
 # Coil64
-ProgramName = 'test_prj'
-AUTORUN = True
-TG = False
-MAIL = False
-LOGGING = False
+ProgramName = 'Adam42'
+AUTORUN = False
+LIVENESS_DETECT = False
+
+SERVICE_NAME = 'systemAdmin32'
 
 
 # путь до директории с файлом автозапуска
-PATH = "E:/Python_programs/Fintech-Security-Superhero-hack/test"
+PATH = "E:/Python_programs/Fintech-Security-Superhero-hack"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

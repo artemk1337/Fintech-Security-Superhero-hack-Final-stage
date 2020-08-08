@@ -1,14 +1,28 @@
 ### NEED UAC! ###
-import subprocess
-import time
+
 from datetime import datetime
 #!pip install pywin32
 import win32evtlog
-import os, signal
+import subprocess
+import signal
+import time
+import os
 
-from utils import run_async, logging, restart, block_system
-from scheduler import Schedule
+
+from utils import run_async, logging, restart, block_system, send_msg, shutdown_system
+from services import check_status_service, stop_service
 from private import USERNAME, PATH, AUTORUN, ProgramName
+from file_cheker import CheckFiles
+from scheduler import Schedule
+
+
+# <=======================================> #
+# <========== ValidTaskAndRules ==========> #
+# Мониторит события с кодами измеения       #
+# задач в планировщике заданий, политики    #
+# аудита, прав пользователя и служб         #
+# <=======================================> #
+# <=======================================> #
 
 
 class ValidTaskAndRules:
@@ -76,36 +90,37 @@ class ValidTaskAndRules:
         def check_editing_tasks():
             if self.AUTORUN is True and event.EventID in eventID_editing_tasks \
                     and USERNAME in data[1]:
-                print(data[4], event.EventID, event.TimeWritten)
+                # print(data[4], event.EventID, event.TimeWritten)
+
+                # Более не используется
                 if PATH in data[5]:
-                    Schedule().add_schedule()
                     #
-                    #
-                    #
-                    # send_msg('Попытка изменить задачу в планировщике')
                     # block_system()
+                    if self.AUTORUN is True: Schedule().add_schedule()
+                    logging.error('ПОПЫТКА ИЗМЕНИТЬ ЗАДАЧУ В ПЛАНИРОВЩИКЕ')
+                    send_msg('Попытка изменить задачу в планировщике')
+                    # stop_and_del_service()
+                    # shutdown_system()
                     os.kill(os.getpid(), signal.SIGINT)
                     #
-                    #
-                    #
-                    return datetime.now()
+
                 if Schedule().check_schedule() != 0:
                     #
-                    #
-                    #
-                    # send_msg('Попытка изменить задачу в планировщике')
                     # block_system()
+                    if self.AUTORUN is True: Schedule().add_schedule()
+                    logging.error('ПОПЫТКА ИЗМЕНИТЬ ЗАДАЧУ В ПЛАНИРОВЩИКЕ')
+                    send_msg('Попытка изменить задачу в планировщике')
+                    # stop_and_del_service()
+                    # shutdown_system()
                     os.kill(os.getpid(), signal.SIGINT)
                     #
-                    #
-                    #
-                    return datetime.now()
+
             return None
 
         def check_editing_audit():
             if event.EventID in eventID_editing_audit \
                     and USERNAME in data[1]:
-                print(data[4], event.EventID, event.TimeWritten)
+                # print(data[4], event.EventID, event.TimeWritten)
                 # 'enable' or 'disable'
                 # Устанавливает аудит на отображение в событиях изменение задач
                 self.change_audit_objects('enable', 'enable')
@@ -115,12 +130,33 @@ class ValidTaskAndRules:
         def check_remote_access():
             if event.EventID in eventID_editing_auth \
                     and USERNAME in data[1]:
-                print(data[4], event.EventID, event.TimeWritten)
+                # print(data[4], event.EventID, event.TimeWritten)
                 # 'enable' or 'disable'
                 # Отключает удаленный доступ
                 self.change_RemoteInteractiveLogonRight('SeRemoteInteractiveLogonRight')
                 return datetime.now()
             return None
+
+        # Нужно избавиться от вывода в терминал
+        # проверка сервисов
+        def check_services_status():
+            status = check_status_service()
+            if status == 1:
+                # block_system()
+                if self.AUTORUN is True: Schedule().add_schedule()
+                logging.error('ПОПЫТКА ИЗМЕНИТЬ СЕРВИС')
+                send_msg('ПОПЫТКА ИЗМЕНИТЬ СЕРВИС')
+                stop_service()
+                # shutdown_system()
+                os.kill(os.getpid(), signal.SIGINT)
+            elif status == -1:
+                # block_system()
+                if self.AUTORUN is True: Schedule().add_schedule()
+                logging.error('ПОПЫТКА ИЗМЕНИТЬ СЕРВИС')
+                send_msg('ПОПЫТКА ИЗМЕНИТЬ СЕРВИС')
+                stop_service()
+                # shutdown_system()
+                os.kill(os.getpid(), signal.SIGINT)
 
         # Основная часть
 
@@ -128,9 +164,18 @@ class ValidTaskAndRules:
         if self.AUTORUN is True: Schedule().add_schedule()
         self.change_audit_objects('enable', 'enable')
         self.change_RemoteInteractiveLogonRight('SeRemoteInteractiveLogonRight')
+
+        # меняем права доступа к файлу
+        # CheckFiles().exist_files_and_permission()
+
         # время, до которого нужно сканировать события из диспетчера событий
         last_action_time = datetime.now()
         while True:
+
+            #
+            check_services_status()
+            #
+
             # открываем логи
             hand, flags = open_event_log()
             events = [1]

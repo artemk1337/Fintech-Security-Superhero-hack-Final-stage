@@ -1,7 +1,12 @@
 from threading import Thread
 from functools import wraps
-import psutil, ctypes, os, signal
+from multiprocessing import Process as MultiProcess
+from multiprocessing import freeze_support
+import psutil, ctypes, os
+import subprocess
 
+from private import TG, MAIL, MAC, PC_info, USERNAME
+from message import send_msg
 
 # Логирование
 import logging
@@ -38,9 +43,10 @@ def block_system():
         ctypes.windll.user32.LockWorkStation()
 
 
+def shutdown_system():
+    subprocess.check_output('shutdown -l')
+
+
 # Перезапуск программы и убийство процесса
 def restart(func_restart, pids=None):
     func_restart()
-
-
-

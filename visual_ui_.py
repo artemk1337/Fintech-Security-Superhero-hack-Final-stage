@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'visual_ui.ui'
+# Form implementation generated from reading ui file 'visual_ui1.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.0
 #
@@ -14,15 +14,25 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(801, 652)
+        MainWindow.resize(750, 500)
+        MainWindow.setMinimumSize(QtCore.QSize(750, 500))
+        MainWindow.setMaximumSize(QtCore.QSize(750, 500))
+        MainWindow.setStyleSheet("QMainWindow {\n"
+"background:#020024;\n"
+"}")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
+        self.centralwidget.setStyleSheet("QWidget {\n"
+"background:#020024;\n"
+"}")
         self.centralwidget.setObjectName("centralwidget")
-        self.widget = QtWidgets.QWidget(self.centralwidget)
-        self.widget.setGeometry(QtCore.QRect(10, 10, 781, 641))
-        self.widget.setObjectName("widget")
-        self.final_layout = QtWidgets.QVBoxLayout(self.widget)
+        self.layoutWidget = QtWidgets.QWidget(self.centralwidget)
+        self.layoutWidget.setGeometry(QtCore.QRect(0, 0, 742, 498))
+        self.layoutWidget.setObjectName("layoutWidget")
+        self.final_layout = QtWidgets.QVBoxLayout(self.layoutWidget)
         self.final_layout.setContentsMargins(0, 0, 0, 0)
         self.final_layout.setObjectName("final_layout")
+        self.layout_dfs = QtWidgets.QVBoxLayout()
+        self.layout_dfs.setObjectName("layout_dfs")
         self.horizontalLayout_6 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_6.setObjectName("horizontalLayout_6")
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
@@ -35,10 +45,19 @@ class Ui_MainWindow(object):
         self.verticalLayout.setObjectName("verticalLayout")
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
-        self.label = QtWidgets.QLabel(self.widget)
+        self.label = QtWidgets.QLabel(self.layoutWidget)
         font = QtGui.QFont()
+        font.setFamily("Century Gothic")
         font.setPointSize(12)
+        font.setItalic(True)
         self.label.setFont(font)
+        self.label.setStyleSheet("QWidget {\n"
+"font-style: italic;\n"
+"color: white;\n"
+"border: 0px;\n"
+"font-family: Century Gothic;\n"
+"font-size: 12pt;\n"
+"};")
         self.label.setObjectName("label")
         self.horizontalLayout_2.addWidget(self.label)
         spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
@@ -46,12 +65,26 @@ class Ui_MainWindow(object):
         self.verticalLayout.addLayout(self.horizontalLayout_2)
         spacerItem3 = QtWidgets.QSpacerItem(20, 1, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
         self.verticalLayout.addItem(spacerItem3)
-        self.custumerId_text = QtWidgets.QLineEdit(self.widget)
+        self.custumerId_text = QtWidgets.QLineEdit(self.layoutWidget)
         self.custumerId_text.setMinimumSize(QtCore.QSize(0, 31))
         self.custumerId_text.setMaximumSize(QtCore.QSize(16777215, 31))
         font = QtGui.QFont()
-        font.setPointSize(10)
+        font.setFamily("Century Gothic")
+        font.setPointSize(12)
+        font.setBold(True)
+        font.setItalic(False)
+        font.setWeight(75)
         self.custumerId_text.setFont(font)
+        self.custumerId_text.setStyleSheet("QLineEdit {\n"
+"font: bold;\n"
+"size: 12;\n"
+"font-family: Century Gothic;\n"
+"background-color: #3E486F;\n"
+"border: 2px solid #7796B6;\n"
+"color: white;\n"
+"border-radius: 10px;\n"
+"}\n"
+"")
         self.custumerId_text.setText("")
         self.custumerId_text.setObjectName("custumerId_text")
         self.verticalLayout.addWidget(self.custumerId_text)
@@ -62,10 +95,19 @@ class Ui_MainWindow(object):
         self.verticalLayout_2.setObjectName("verticalLayout_2")
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
-        self.label_2 = QtWidgets.QLabel(self.widget)
+        self.label_2 = QtWidgets.QLabel(self.layoutWidget)
         font = QtGui.QFont()
+        font.setFamily("Century Gothic")
         font.setPointSize(12)
+        font.setItalic(True)
         self.label_2.setFont(font)
+        self.label_2.setStyleSheet("QWidget {\n"
+"font-style: italic;\n"
+"color: white;\n"
+"border: 0px;\n"
+"font-family: Century Gothic;\n"
+"font-size: 12pt;\n"
+"};")
         self.label_2.setObjectName("label_2")
         self.horizontalLayout_3.addWidget(self.label_2)
         spacerItem5 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
@@ -73,12 +115,26 @@ class Ui_MainWindow(object):
         self.verticalLayout_2.addLayout(self.horizontalLayout_3)
         spacerItem6 = QtWidgets.QSpacerItem(20, 1, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
         self.verticalLayout_2.addItem(spacerItem6)
-        self.pcInfo_text = QtWidgets.QLineEdit(self.widget)
+        self.pcInfo_text = QtWidgets.QLineEdit(self.layoutWidget)
         self.pcInfo_text.setMinimumSize(QtCore.QSize(0, 31))
         self.pcInfo_text.setMaximumSize(QtCore.QSize(16777215, 31))
         font = QtGui.QFont()
-        font.setPointSize(10)
+        font.setFamily("Century Gothic")
+        font.setPointSize(12)
+        font.setBold(True)
+        font.setItalic(False)
+        font.setWeight(75)
         self.pcInfo_text.setFont(font)
+        self.pcInfo_text.setStyleSheet("QLineEdit {\n"
+"font: bold;\n"
+"size: 12;\n"
+"font-family: Century Gothic;\n"
+"background-color: #3E486F;\n"
+"border: 2px solid #7796B6;\n"
+"color: white;\n"
+"border-radius: 10px;\n"
+"}\n"
+"")
         self.pcInfo_text.setObjectName("pcInfo_text")
         self.verticalLayout_2.addWidget(self.pcInfo_text)
         self.verticalLayout_4.addLayout(self.verticalLayout_2)
@@ -88,10 +144,19 @@ class Ui_MainWindow(object):
         self.verticalLayout_3.setObjectName("verticalLayout_3")
         self.horizontalLayout_4 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_4.setObjectName("horizontalLayout_4")
-        self.label_3 = QtWidgets.QLabel(self.widget)
+        self.label_3 = QtWidgets.QLabel(self.layoutWidget)
         font = QtGui.QFont()
+        font.setFamily("Century Gothic")
         font.setPointSize(12)
+        font.setItalic(True)
         self.label_3.setFont(font)
+        self.label_3.setStyleSheet("QWidget {\n"
+"font-style: italic;\n"
+"color: white;\n"
+"border: 0px;\n"
+"font-family: Century Gothic;\n"
+"font-size: 12pt;\n"
+"};")
         self.label_3.setObjectName("label_3")
         self.horizontalLayout_4.addWidget(self.label_3)
         spacerItem8 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
@@ -101,17 +166,43 @@ class Ui_MainWindow(object):
         self.verticalLayout_3.addItem(spacerItem9)
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
-        self.dir_text = QtWidgets.QLineEdit(self.widget)
+        self.dir_text = QtWidgets.QLineEdit(self.layoutWidget)
         self.dir_text.setMinimumSize(QtCore.QSize(0, 31))
         self.dir_text.setMaximumSize(QtCore.QSize(16777215, 31))
         font = QtGui.QFont()
-        font.setPointSize(10)
+        font.setFamily("Century Gothic")
+        font.setPointSize(12)
+        font.setBold(True)
+        font.setItalic(False)
+        font.setWeight(75)
         self.dir_text.setFont(font)
+        self.dir_text.setStyleSheet("QLineEdit {\n"
+"font: bold;\n"
+"size: 12;\n"
+"font-family: Century Gothic;\n"
+"background-color: #3E486F;\n"
+"border: 2px solid #7796B6;\n"
+"color: white;\n"
+"border-bottom-left-radius: 10px;\n"
+"border-top-left-radius: 10px;\n"
+"}\n"
+"")
+        self.dir_text.setText("")
         self.dir_text.setObjectName("dir_text")
         self.horizontalLayout.addWidget(self.dir_text)
-        self.open_dir = QtWidgets.QToolButton(self.widget)
+        self.open_dir = QtWidgets.QToolButton(self.layoutWidget)
         self.open_dir.setMinimumSize(QtCore.QSize(31, 31))
         self.open_dir.setMaximumSize(QtCore.QSize(31, 31))
+        self.open_dir.setStyleSheet("QToolButton {\n"
+"font: bold;\n"
+"font-family: Century Gothic;\n"
+"background-color: rgb(155, 181, 240);\n"
+"border: 2px solid #7796B6;\n"
+"color: white;\n"
+"border-bottom-right-radius: 10px;\n"
+"border-top-right-radius: 10px;\n"
+"}\n"
+"")
         self.open_dir.setObjectName("open_dir")
         self.horizontalLayout.addWidget(self.open_dir)
         self.verticalLayout_3.addLayout(self.horizontalLayout)
@@ -125,59 +216,170 @@ class Ui_MainWindow(object):
         self.verticalLayout_5.setObjectName("verticalLayout_5")
         spacerItem12 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.verticalLayout_5.addItem(spacerItem12)
-        self.horizontalLayout_5 = QtWidgets.QHBoxLayout()
-        self.horizontalLayout_5.setObjectName("horizontalLayout_5")
-        self.autorun_box = QtWidgets.QCheckBox(self.widget)
+        self.horizontalLayout_9 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_9.setObjectName("horizontalLayout_9")
+        self.autorun_box = QtWidgets.QCheckBox(self.layoutWidget)
         self.autorun_box.setMinimumSize(QtCore.QSize(0, 31))
         self.autorun_box.setMaximumSize(QtCore.QSize(16777215, 31))
         font = QtGui.QFont()
+        font.setFamily("Century Gothic")
         font.setPointSize(12)
+        font.setItalic(True)
         self.autorun_box.setFont(font)
+        self.autorun_box.setStyleSheet("QWidget {\n"
+"font-style: italic;\n"
+"color: white;\n"
+"border: 0px;\n"
+"font-family: Century Gothic;\n"
+"font-size: 12pt;\n"
+"};")
         self.autorun_box.setObjectName("autorun_box")
-        self.horizontalLayout_5.addWidget(self.autorun_box)
+        self.horizontalLayout_9.addWidget(self.autorun_box)
         spacerItem13 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout_5.addItem(spacerItem13)
-        self.verticalLayout_5.addLayout(self.horizontalLayout_5)
-        spacerItem14 = QtWidgets.QSpacerItem(20, 8, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
-        self.verticalLayout_5.addItem(spacerItem14)
-        self.groupBox = QtWidgets.QGroupBox(self.widget)
-        self.groupBox.setMinimumSize(QtCore.QSize(184, 151))
-        self.groupBox.setMaximumSize(QtCore.QSize(184, 151))
+        self.horizontalLayout_9.addItem(spacerItem13)
+        self.verticalLayout_5.addLayout(self.horizontalLayout_9)
+        self.horizontalLayout_8 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_8.setObjectName("horizontalLayout_8")
+        self.liveness_box = QtWidgets.QCheckBox(self.layoutWidget)
+        self.liveness_box.setMinimumSize(QtCore.QSize(0, 31))
+        self.liveness_box.setMaximumSize(QtCore.QSize(16777215, 31))
         font = QtGui.QFont()
-        font.setPointSize(13)
+        font.setFamily("Century Gothic")
+        font.setPointSize(12)
+        font.setItalic(True)
+        self.liveness_box.setFont(font)
+        self.liveness_box.setStyleSheet("QWidget {\n"
+"font-style: italic;\n"
+"color: white;\n"
+"border: 0px;\n"
+"font-family: Century Gothic;\n"
+"font-size: 12pt;\n"
+"};")
+        self.liveness_box.setObjectName("liveness_box")
+        self.horizontalLayout_8.addWidget(self.liveness_box)
+        spacerItem14 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_8.addItem(spacerItem14)
+        self.verticalLayout_5.addLayout(self.horizontalLayout_8)
+        spacerItem15 = QtWidgets.QSpacerItem(20, 8, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        self.verticalLayout_5.addItem(spacerItem15)
+        self.groupBox = QtWidgets.QGroupBox(self.layoutWidget)
+        self.groupBox.setMinimumSize(QtCore.QSize(254, 181))
+        self.groupBox.setMaximumSize(QtCore.QSize(254, 181))
+        font = QtGui.QFont()
+        font.setFamily("Century Gothic")
+        font.setPointSize(12)
+        font.setItalic(True)
         self.groupBox.setFont(font)
+        self.groupBox.setStyleSheet("QWidget {\n"
+"font-style: italic;\n"
+"color: white;\n"
+"font-family: Century Gothic;\n"
+"font-size: 12pt;\n"
+"border-radius: 10px;\n"
+"border: 2px solid #7796B6;\n"
+"};")
         self.groupBox.setObjectName("groupBox")
         self.tg_box = QtWidgets.QCheckBox(self.groupBox)
-        self.tg_box.setGeometry(QtCore.QRect(30, 30, 171, 21))
+        self.tg_box.setGeometry(QtCore.QRect(30, 30, 121, 21))
+        self.tg_box.setStyleSheet("QWidget {\n"
+"border: 0px;\n"
+"}")
         self.tg_box.setObjectName("tg_box")
         self.mail_box = QtWidgets.QCheckBox(self.groupBox)
-        self.mail_box.setGeometry(QtCore.QRect(30, 70, 171, 21))
+        self.mail_box.setGeometry(QtCore.QRect(30, 100, 101, 21))
+        self.mail_box.setStyleSheet("QWidget {\n"
+"border: 0px;\n"
+"}")
         self.mail_box.setObjectName("mail_box")
-        self.log_box = QtWidgets.QCheckBox(self.groupBox)
-        self.log_box.setGeometry(QtCore.QRect(30, 110, 171, 21))
-        self.log_box.setObjectName("log_box")
+        self.tg_text = QtWidgets.QLineEdit(self.groupBox)
+        self.tg_text.setGeometry(QtCore.QRect(30, 60, 201, 31))
+        self.tg_text.setMinimumSize(QtCore.QSize(0, 31))
+        self.tg_text.setMaximumSize(QtCore.QSize(16777215, 31))
+        font = QtGui.QFont()
+        font.setFamily("Century Gothic")
+        font.setPointSize(12)
+        font.setBold(True)
+        font.setItalic(False)
+        font.setWeight(75)
+        self.tg_text.setFont(font)
+        self.tg_text.setStyleSheet("QLineEdit {\n"
+"font: bold;\n"
+"size: 12;\n"
+"font-family: Century Gothic;\n"
+"background-color: #3E486F;\n"
+"border: 2px solid #7796B6;\n"
+"color: white;\n"
+"border-radius: 10px;\n"
+"}\n"
+"")
+        self.tg_text.setText("")
+        self.tg_text.setObjectName("tg_text")
+        self.mail_text = QtWidgets.QLineEdit(self.groupBox)
+        self.mail_text.setGeometry(QtCore.QRect(30, 130, 201, 31))
+        self.mail_text.setMinimumSize(QtCore.QSize(0, 31))
+        self.mail_text.setMaximumSize(QtCore.QSize(16777215, 31))
+        font = QtGui.QFont()
+        font.setFamily("Century Gothic")
+        font.setPointSize(12)
+        font.setBold(True)
+        font.setItalic(False)
+        font.setWeight(75)
+        self.mail_text.setFont(font)
+        self.mail_text.setStyleSheet("QLineEdit {\n"
+"font: bold;\n"
+"size: 10;\n"
+"font-family: Century Gothic;\n"
+"background-color: #3E486F;\n"
+"border: 2px solid #7796B6;\n"
+"color: white;\n"
+"border-radius: 10px;\n"
+"}\n"
+"")
+        self.mail_text.setText("")
+        self.mail_text.setObjectName("mail_text")
         self.verticalLayout_5.addWidget(self.groupBox)
-        spacerItem15 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.verticalLayout_5.addItem(spacerItem15)
+        spacerItem16 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.verticalLayout_5.addItem(spacerItem16)
         self.horizontalLayout_6.addLayout(self.verticalLayout_5)
-        spacerItem16 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout_6.addItem(spacerItem16)
-        self.final_layout.addLayout(self.horizontalLayout_6)
+        spacerItem17 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_6.addItem(spacerItem17)
+        self.horizontalLayout_6.setStretch(1, 6)
+        self.layout_dfs.addLayout(self.horizontalLayout_6)
         self.horizontalLayout_7 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_7.setObjectName("horizontalLayout_7")
-        spacerItem17 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout_7.addItem(spacerItem17)
-        self.install_button = QtWidgets.QPushButton(self.widget)
+        spacerItem18 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_7.addItem(spacerItem18)
+        self.install_button = QtWidgets.QPushButton(self.layoutWidget)
         self.install_button.setMinimumSize(QtCore.QSize(201, 71))
         self.install_button.setMaximumSize(QtCore.QSize(201, 71))
         font = QtGui.QFont()
+        font.setFamily("Century Gothic")
         font.setPointSize(12)
+        font.setBold(True)
+        font.setItalic(False)
+        font.setWeight(75)
         self.install_button.setFont(font)
+        self.install_button.setStyleSheet("QPushButton {\n"
+"font: bold;\n"
+"size: 12;\n"
+"font-family: Century Gothic;\n"
+"background-color: #3E486F;\n"
+"border: 2px solid #7796B6;\n"
+"color: white;\n"
+"border-radius: 10px;\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"background-color: #D6D0D9;\n"
+"}")
         self.install_button.setObjectName("install_button")
         self.horizontalLayout_7.addWidget(self.install_button)
-        spacerItem18 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout_7.addItem(spacerItem18)
-        self.final_layout.addLayout(self.horizontalLayout_7)
+        spacerItem19 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_7.addItem(spacerItem19)
+        self.layout_dfs.addLayout(self.horizontalLayout_7)
+        self.final_layout.addLayout(self.layout_dfs)
+        spacerItem20 = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        self.final_layout.addItem(spacerItem20)
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
@@ -191,8 +393,8 @@ class Ui_MainWindow(object):
         self.label_3.setText(_translate("MainWindow", "Выбор директории"))
         self.open_dir.setText(_translate("MainWindow", "..."))
         self.autorun_box.setText(_translate("MainWindow", "Автозапуск"))
+        self.liveness_box.setText(_translate("MainWindow", "Liveness detection"))
         self.groupBox.setTitle(_translate("MainWindow", "Обратная связь"))
         self.tg_box.setText(_translate("MainWindow", "Телеграм"))
         self.mail_box.setText(_translate("MainWindow", "Почта @"))
-        self.log_box.setText(_translate("MainWindow", "Логирование"))
         self.install_button.setText(_translate("MainWindow", "Установка"))

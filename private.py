@@ -4,7 +4,7 @@
 
 
 telegram_admins = [436264579, 673135047]
-TOKEN = '966549792:AAEW2fJH7DMRYydCpqDyfvJ6epyO1IGAmOk'
+TOKEN = ''
 REQUEST_KWARGS = None
 TG = True
 
